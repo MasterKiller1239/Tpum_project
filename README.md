@@ -1,5 +1,5 @@
 # Tpum_project
-Projekt aplikacji na przedmiot Tpum
+Application design for Tpum classes
 # Programming Technology Lab
 
 ## Team
@@ -8,13 +8,8 @@ Projekt aplikacji na przedmiot Tpum
 | ----------------------- | ---------------------------------------- |
 | Jakub G.                | `{2e6f61a2-e6e1-4987-b335-9170d648f85a}` |
 | Natalia W.              | `{e5e8078e-1c72-4a90-961c-6e4fbe8e1359}` |
-# Tworzenie repozytorium - lista kontrolna
 
-## Tworzenie repozytorium
-
-- [ ] możliwość skopiowania zawartości repozytorium na komputer prowadzącego
-- [ ] bezbłędna kompilacja programu
-- [ ] pozytywny wynik testów jednostkowych
+# Create a repository - checklist
 
 ## Create a repository
 

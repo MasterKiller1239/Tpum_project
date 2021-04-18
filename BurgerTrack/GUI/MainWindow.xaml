@@ -1,0 +1,121 @@
+﻿<Window x:Class="GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        xmlns:viewModels="clr-namespace:GUI.ViewModels"
+        mc:Ignorable="d"
+        DataContext="{StaticResource MainViewModelKey}"
+        WindowState="Maximized"
+        FontFamily="Lato"
+        Title="Signal Generator" Height="768" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+        <Style x:Key="myListboxStyle">
+            <Style.Resources>
+                <!-- Background of selected item when focussed -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF7E6060" />
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+
+    <Grid  Background="RosyBrown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.RowSpan="1" Background="RosyBrown" >
+            <TextBlock Text="      BurgerTrack" HorizontalAlignment="Center" Margin="568,14,-502,6" FontSize="28" FontWeight="Heavy" Width="214"></TextBlock>
+            <Button 
+                Command="{Binding SubscribeCommand}"
+                Background="Red" 
+                FontWeight="Bold" 
+                Content="SUBSKRYBUJ" BorderBrush="Transparent" Foreground="White"  FontSize="15" Margin="72,14,83,11" Click="Button_Click"/>
+        </Grid>
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="50 10 50 0" HorizontalAlignment="Right"/>
+        <StackPanel Grid.Column="0" Grid.Row="2"  Background="SaddleBrown"  >
+            <Label Content="Podaj swoje imię:" Margin="40, 0"/>
+            <TextBox x:Name="namebox" Margin="40,10" Width="200" Height="30" Text="{Binding customerName}"/>
+            <ListView Height="300" 
+                      Margin="15" 
+                       Background="RosyBrown"
+                      BorderBrush="Transparent" 
+                      x:Name="cart" 
+                      ItemsSource="{Binding cart}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      SelectedItem="{Binding selectedCart, Mode=TwoWay}">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information">
+                        <GridViewColumn Header="Nazwa" Width="150" DisplayMemberBinding="{Binding name}" />
+                        <GridViewColumn Header="Cena" Width="100" DisplayMemberBinding="{Binding price, StringFormat=\{0:C\}}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Width="125" 
+                        Height="35" 
+                        Command="{Binding DeleteFromCartCommand}"
+                        Margin="78,0,77,90" 
+                        Background="Black" 
+                    Foreground="White"
+                        FontWeight="Bold" 
+                        Content="Usuń z koszyka"/>
+            <Button Width="125" 
+                        Height="35" 
+                        Command="{Binding OrderBurgerCommand}"
+                        Margin="78 0,77,50" 
+                        Background="Black" 
+                    Foreground="White"
+                        FontWeight="Bold" 
+                        Content="Złóż zamówienie"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" Background="SaddleBrown">
+            <StackPanel>
+                <TextBlock Grid.Column="1" Margin="342,50,50,50" FontSize="22" FontWeight="Bold" Text="Dostępne Burgery"/>
+                <StackPanel Margin="20 0">
+                    <ListBox x:Name="ListViewBurgers" 
+                             ItemsSource="{Binding ListViewBurgers}" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                            Background="RosyBrown" BorderBrush="Transparent" 
+                             Style="{StaticResource myListboxStyle}"
+                             SelectedItem="{Binding selectedBurger, Mode=TwoWay}" Height="342" Width="695" SelectionChanged="ListViewBurgers_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="10" Width="180" Height="300">
+                                    <StackPanel>
+                                        <Border Height="150" CornerRadius="5" Margin="5 5 5 5">
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="{Binding image}" Stretch="Uniform"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <StackPanel Height="100">
+                                            <TextBlock Margin="5" Text="{Binding name}"  FontSize="15" FontWeight="Medium" VerticalAlignment="Top" />
+                                            <TextBlock Margin="5 0 5 0" Text="{Binding description}" TextWrapping="WrapWithOverflow" FontSize="13" FontWeight="Light" TextAlignment="Left"/>
+                                        </StackPanel>
+                                        <TextBlock Margin="5 0 5 0" Text="{Binding price, StringFormat=\{0:C\}}"  FontSize="15" FontWeight="Medium" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </StackPanel>
+                <Button Width="381" 
+                        Height="95" 
+                        Command="{Binding AddToCartCommand}"
+                        Margin="0 0 0 50" 
+                        Background="Black" 
+                    Foreground="White"
+                        FontWeight="Bold" 
+                        Content="Dodaj do koszyka"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

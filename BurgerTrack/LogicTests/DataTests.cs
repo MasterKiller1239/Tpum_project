@@ -18,7 +18,7 @@ namespace Tests
         {
             List<Customer> customers = new List<Customer>()
             {
-                  new Customer("Kuba", "Avalon Hill", "Kuba@imaking.uk", "(360) 6104514"),
+                  new Customer("Kuba", "Avalon Hill", "Kuba@imaking.eu", "(360) 6104514"),
                   new Customer("Morgana Le Fay", "Wavery Place ", "dvarney15@mit.edu", "(925) 8527446"),
                   new Customer("Merlin ", "Neverland", "ryea16@fema.gov", "(926) 3852562"),
                   new Customer("Uther Pendragon", "Camelot King Chamber", "yoldey17@flavors.me", "(719) 5899787")
@@ -33,9 +33,11 @@ namespace Tests
 
             List<Burger> Burgers = new List<Burger>()
             {
-                new Burger("Egzotyczny prosiak", 26.18f, "szynka, ananas, curry"),
-                new Burger("Płacze osioł", 27.87f, "salami, cebula biała"),
-                new Burger("Wiejskie klimaty", 19.55f, "bekon, cebula biała")
+                 new Burger("Big-King", 2.87f, "Pyszny i malutki"),
+
+                new Burger("Small King", 2.18f,"Mniam"),
+              
+                new Burger("Big-King-XXL", 1.55f, "Smakowity")
             };
 
             data = new DataContext();
@@ -147,25 +149,25 @@ namespace Tests
             List<Burger> Burgers = (List<Burger>)repository.GetAllBurgers();
             List<Customer> customers = (List<Customer>)repository.GetAllCustomers();
 
-            Burger Burger = new Burger("Egzotyczny prosiak", 21.23f, "bez");
-            Customer customer = new Customer("Kuba", "podmostna", "Kuba@imaking.uk", "987654321");
+            Burger Burger = new Burger("Big-King", 2.23f, "bez");
+            Customer customer = new Customer("Kuba", "Pokatna", "Kuba@imaking.pl", "987654321");
 
-            Burger dbp = Burgers[0];
+            Burger dbb = Burgers[0];
             Customer dbc = customers[0];
 
-            dbp.description.Should().Be("szynka, ananas, curry");
-            dbp.price.Should().Be(26.18f);
+            dbb.description.Should().Be("Pyszny i malutki");
+            dbb.price.Should().Be(2.87f);
             dbc.address.Should().Be("Avalon Hill");
-            dbc.email.Should().Be("Kuba@imaking.uk");
+            dbc.email.Should().Be("Kuba@imaking.eu");
             dbc.phone.Should().Be("(360) 6104514");
            
             repository.UpdateCustomer(customer);
             repository.UpdateBurger(Burger);
 
-            dbp.description.Should().Be("bez");
-            dbp.price.Should().Be(21.23f);
-            dbc.address.Should().Be("podmostna");
-            dbc.email.Should().Be("Kuba@imaking.uk");
+            dbb.description.Should().Be("bez");
+            dbb.price.Should().Be(2.23f);
+            dbc.address.Should().Be("Pokatna");
+            dbc.email.Should().Be("Kuba@imaking.eu");
             dbc.phone.Should().Be("987654321");
         }
     }

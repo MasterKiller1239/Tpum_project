@@ -12,9 +12,9 @@ namespace ClientPresentation
             OrderSystem os = new OrderSystem();
             os.StartWorkDay();
 
-            CustomerDTO customer1 = os.GetCustomerDTO("Mordred");
+            CustomerDTO customer1 = os.GetCustomerDTO("Tosia");
             CustomerDTO customer2 = os.GetCustomerDTO("Kuba");
-            CustomerDTO customer3 = os.GetCustomerDTO("Nimue");
+            CustomerDTO customer3 = os.GetCustomerDTO("Basia");
 
             os.SubscribeToPromotion(customer1);
             os.SubscribeToPromotion(customer3);

@@ -145,6 +145,10 @@ namespace Logic
         #region DataAccess
         public CustomerDTO GetCustomerDTO(string name)
         {
+            if (repository.GetCustomer(name) == null)
+            {
+                return null;
+            }
             return DTOMappings.MapCustomer(repository.GetCustomer(name));
         }
 

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Logic.Requests
+namespace ConnectionDependencies.Requests
 {
     [Serializable]
     public class RequestWeb

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.Serialization;
-namespace Logic.DTO
-{
+﻿using System.Runtime.Serialization;
+
+namespace LogicClient.OTD
+{ 
     [DataContract]
-    public class BurgerDTO
+    public class BurgerOTD
     {
         [DataMember]
         public string name { get; set; }

@@ -54,6 +54,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConnectionDependencies\ConnectionDependencies.csproj">
+      <Project>{728bfce6-8c94-458e-b33b-5d63456daab5}</Project>
+      <Name>ConnectionDependencies</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logic\Logic.csproj">
       <Project>{A11E0051-8B22-498F-BE69-0B516168229D}</Project>
       <Name>Logic</Name>

@@ -1,6 +1,7 @@
 ﻿//using Logic;
-using Logic.DTO;
-using Logic.Requests;
+using ConnectionDependencies.DTO;
+using ConnectionDependencies.Requests;
+using LogicClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,13 @@ namespace GUI.ViewModels
         #region Properties
 
         private readonly Dispatcher _dispatcher;
-
+        public SystemController systemController;
         public ObservableCollection<BurgerDTO> ListViewBurgers { get; set; }
         public BurgerDTO selectedBurger { get; set; }
         public ObservableCollection<BurgerDTO> cart { get; set; } = new ObservableCollection<BurgerDTO>();
         public BurgerDTO selectedCart { get; set; }
         public string customerName { get; set; }
         //private OrderSystem os;
-        private WebSocketClient webSocketClient;
 
 
         #endregion
@@ -42,13 +42,11 @@ namespace GUI.ViewModels
         {
             //os = new OrderSystem();
             //os.StartWorkDay();
-            webSocketClient = new WebSocketClient();
-            webSocketClient.Connect("ws://localhost:8080/BurgerTrack/");
-  
-            webSocketClient.onMessage = new Action<string>(receiveMessage);
+            systemController = new SystemController();
+            systemController.onProcess = new Action<string>(receiveMessage);
             this._dispatcher = Dispatcher.CurrentDispatcher;
-            webSocketClient.RequestBurger();
-            this.ListViewBurgers = new ObservableCollection<BurgerDTO>();   
+            systemController.RequestListOfBurgers();
+            this.ListViewBurgers = systemController.GetListViewBurger();   
             this.AddToCartCommand = new RelayCommand(param => AddToCart(), null);
             this.DeleteFromCartCommand = new RelayCommand(param => DeleteFromCart(), null);
             this.OrderBurgerCommand = new RelayCommand(param => OrderBurger(), null);
@@ -60,41 +58,23 @@ namespace GUI.ViewModels
         #region Methods
         public void receiveMessage(string message)
         {
-            RequestWeb request = JsonConvert.DeserializeObject<RequestWeb>(message);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("[{0}] Klient otrzymał odpowiedź: {1} , status: {2}", DateTime.Now.ToString("HH:mm:ss.fff"), request.Tag, request.Status);
-            string outp = String.Empty;
-            switch (request.Tag)
+            switch (message)
             {
-                case "order":
-                    if (request.Status == RequestStatus.SUCCESS)
-                    {
-                        MessageBoxResult success = MessageBox.Show("Zamówienie udane, prosimy czekać na zamówienie.", "Zamówienie udane.", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else
-                    {
-                        MessageBoxResult noCustomer = MessageBox.Show("Nie ma takiego użytkownika.", "Nie ma takiego użytkownika.", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
+                case "ORDER SUCCESSFUL - 200":
+                    MessageBoxResult success = MessageBox.Show("Zamówienie udane, prosimy czekać na zamówienie.", "Zamówienie udane.", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
-                case "burgers":
-                    ResponseBurgerList responseBurgerList = JsonConvert.DeserializeObject<ResponseBurgerList>(message);
-                    foreach (BurgerDTO Burger in responseBurgerList.burgers)
-                    {
-                        ListViewBurgers.Add(Burger);
-                    }
+                case "ORDER FAILED - 404":
+                    MessageBoxResult noCustomer = MessageBox.Show("Nie ma takiego użytkownika.", "Nie ma takiego użytkownika.", MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
-                case "subscription":
-                    if (request.Status == RequestStatus.SUCCESS)
-                    {
-                        MessageBoxResult success = MessageBox.Show("Drogi kliencie, od teraz będziesz dostawał powiadomienia o super okazjach w naszym Burgertracku.", "Subskrybujesz naszą Burgertrack.", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else
-                    {
-                        MessageBoxResult noCustomer = MessageBox.Show("Nie ma takiego użytkownika.", "Nie ma takiego użytkownika.", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
+                case "SUBSCRIPTION SUCCESSFUL - 200":
+                    MessageBoxResult successSub = MessageBox.Show("Drogi kliencie, od teraz będziesz dostawał powiadomienia o super okazjach w naszym BurgerTracku.", "Subskrybujesz naszego BurgerTracka.", MessageBoxButton.OK, MessageBoxImage.Information);
+                    break;
+                case "SUBSCRIPTION FAILED - 404":
+                    MessageBoxResult noCustomerSub = MessageBox.Show("Nie ma takiego użytkownika.", "Nie ma takiego użytkownika.", MessageBoxButton.OK, MessageBoxImage.Warning);
                     break;
             }
         }
+
 
         public void AddToCart()
         {
@@ -127,7 +107,7 @@ namespace GUI.ViewModels
                 return;
             }
 
-            webSocketClient.RequestOrder(BurgersToOrder, customerDTO);
+            systemController.RequestOrder(BurgersToOrder, customerDTO);
         }
 
         public void Subscribe()
@@ -138,20 +118,10 @@ namespace GUI.ViewModels
                 return;
             }
 
-            //    CustomerDTO customerDTO = os.GetCustomerDTO(customerName);
-            //    if (customerDTO == null)
-            //    {
-            //        MessageBoxResult noCustomer = MessageBox.Show("Nie ma takiego użytkownika. Wpisz ją w wyznaczonym miejscu.", "Nie ma takiego użytkownika.", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //        return;
-            //    }
-
-            //    os.SubscribeToPromotion(customerDTO);
-
-            //    MessageBoxResult success = MessageBox.Show("Drogi kliencie, od teraz będziesz dostawał powiadomienia o super okazjach w naszym BurgerTracku.", "Subskrybujesz naszą usługę.", MessageBoxButton.OK, MessageBoxImage.Information);
-            CustomerDTO customerDTO = new CustomerDTO();
+             CustomerDTO customerDTO = new CustomerDTO();
             customerDTO.name = customerName;
 
-            webSocketClient.RequestSubscription(customerDTO);
+            systemController.RequestSubscription(customerDTO);
         }
 
         #endregion

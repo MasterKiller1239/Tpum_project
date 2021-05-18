@@ -1,4 +1,4 @@
-﻿namespace Logic.Requests
+﻿namespace ConnectionDependencies.Requests
 {
     public enum RequestStatus
     {

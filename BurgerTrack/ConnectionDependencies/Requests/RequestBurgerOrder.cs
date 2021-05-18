@@ -1,9 +1,9 @@
-﻿using Logic.DTO;
+﻿using ConnectionDependencies.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace Logic.Requests
+namespace ConnectionDependencies.Requests
 {
     [Serializable]
     public class RequestBurgerOrder : RequestWeb

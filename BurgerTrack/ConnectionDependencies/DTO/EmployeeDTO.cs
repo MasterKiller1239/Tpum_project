@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.Serialization;
-namespace Logic.DTO
+namespace ConnectionDependencies.DTO
 {
     [DataContract]
     public class EmployeeDTO

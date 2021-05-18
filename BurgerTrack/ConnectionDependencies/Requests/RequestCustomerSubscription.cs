@@ -1,8 +1,8 @@
-﻿using Logic.DTO;
+﻿using ConnectionDependencies.DTO;
 using Newtonsoft.Json;
 using System;
 
-namespace Logic.Requests
+namespace ConnectionDependencies.Requests
 {
     [Serializable]
     public class RequestCustomerSubscription : RequestWeb

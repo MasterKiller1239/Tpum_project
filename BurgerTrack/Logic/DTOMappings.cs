@@ -1,5 +1,5 @@
 ﻿using Data.Model;
-using ConnectionDependencies.DTO;
+using Logic.DTO;
 using System.Collections.Generic;
 
 namespace Logic

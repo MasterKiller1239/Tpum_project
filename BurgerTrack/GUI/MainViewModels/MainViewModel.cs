@@ -1,6 +1,5 @@
-﻿//using Logic;
-using ConnectionDependencies.DTO;
-using ConnectionDependencies.Requests;
+﻿using DataClient.DTO;
+
 using LogicClient;
 using Newtonsoft.Json;
 using System;
@@ -47,7 +46,7 @@ namespace GUI.ViewModels
             this._dispatcher = Dispatcher.CurrentDispatcher;
             systemController.RequestListOfBurgers();
             this.ListViewBurgers = systemController.GetListViewBurger();   
-            this.AddToCartCommand = new RelayCommand(param => AddToCart(), null);
+            this.AddToCartCommand = new RelayCommand(param =>AddToCart(), null);
             this.DeleteFromCartCommand = new RelayCommand(param => DeleteFromCart(), null);
             this.OrderBurgerCommand = new RelayCommand(param => OrderBurger(), null);
             this.SubscribeCommand = new RelayCommand(param => Subscribe(), null);

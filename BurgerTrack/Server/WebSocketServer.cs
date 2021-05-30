@@ -1,6 +1,5 @@
 ﻿using Logic;
-using ConnectionDependencies.DTO;
-using ConnectionDependencies.Requests;
+using Logic.Requests;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -62,10 +61,10 @@ namespace Server
 
         private string ProcessOrderRequest(RequestBurgerOrder request)
         {
-            CustomerDTO customerDTO = os.GetCustomerDTO(request.customer.name);
+           
             RequestWeb response = new RequestWeb("order");
             string json;
-            if (customerDTO == null)
+            if (os.GetCustomerDTO(request.customer.name) == null)
             {
                 response.Status = RequestStatus.FAIL;
                 json = JsonConvert.SerializeObject(response, Formatting.Indented);
@@ -78,18 +77,18 @@ namespace Server
 
         private string ProcessBurgerRequest()
         {
-            List<BurgerDTO> burgers = os.GetAllBurgersDTO();
-            RequestWeb response = new ResponseBurgerList("burgers", burgers);
+           
+            RequestWeb response = new ResponseBurgerList("burgers", os.GetAllBurgersDTO());
             string json = JsonConvert.SerializeObject(response, Formatting.Indented);
             return json;
         }
 
         private string ProcessSubscriptionRequest(RequestCustomerSubscription request)
         {
-            CustomerDTO customerDTO = os.GetCustomerDTO(request.customer.name);
+           
             RequestWeb response = new RequestWeb("order");
             string json;
-            if (customerDTO == null)
+            if (os.GetCustomerDTO(request.customer.name) == null)
             {
                 response.Status = RequestStatus.FAIL;
                 json = JsonConvert.SerializeObject(response, Formatting.Indented);

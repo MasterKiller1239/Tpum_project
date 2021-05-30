@@ -66,6 +66,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionTests.cs" />
     <Compile Include="DataTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,9 +74,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConnectionDependencies\ConnectionDependencies.csproj">
+      <Project>{728bfce6-8c94-458e-b33b-5d63456daab5}</Project>
+      <Name>ConnectionDependencies</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataClient\DataClient.csproj">
+      <Project>{65B43E1E-4FEC-4A28-83F2-634A3A9E1610}</Project>
+      <Name>DataClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{ACD8F8AE-561E-42E6-BB09-A10DDF3E0451}</Project>
       <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogicClient\LogicClient.csproj">
+      <Project>{d7917b06-0577-4ada-bd68-ad726efd50d3}</Project>
+      <Name>LogicClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\Logic\Logic.csproj">
       <Project>{A11E0051-8B22-498F-BE69-0B516168229D}</Project>

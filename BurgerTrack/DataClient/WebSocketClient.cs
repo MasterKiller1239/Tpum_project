@@ -4,8 +4,8 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ConnectionDependencies.Requests;
-using ConnectionDependencies.DTO;
+using DataClient.Requests;
+using DataClient.DTO;
 using Newtonsoft.Json;
 
 namespace DataClient
@@ -78,7 +78,13 @@ namespace DataClient
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("[{0}] Klient wysłał zapytanie: {1}", DateTime.Now.ToString("HH:mm:ss.fff"), request.Tag);
         }
-
+        public bool CheckConnectionStatus()
+        {
+            if (webSocket.State == WebSocketState.Open)
+                return true;
+            else
+                return false;
+        }
         private async Task Receive()
         {
             int size = 8192;

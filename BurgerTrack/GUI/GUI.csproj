@@ -106,9 +106,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConnectionDependencies\ConnectionDependencies.csproj">
-      <Project>{728bfce6-8c94-458e-b33b-5d63456daab5}</Project>
-      <Name>ConnectionDependencies</Name>
+    <ProjectReference Include="..\DataClient\DataClient.csproj">
+      <Project>{65B43E1E-4FEC-4A28-83F2-634A3A9E1610}</Project>
+      <Name>DataClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\LogicClient\LogicClient.csproj">
       <Project>{d7917b06-0577-4ada-bd68-ad726efd50d3}</Project>

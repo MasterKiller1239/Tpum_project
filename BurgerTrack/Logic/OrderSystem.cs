@@ -1,7 +1,7 @@
 ﻿using Data;
 using Data.Model;
 using Data.Observer;
-using ConnectionDependencies.DTO;
+using Logic.DTO;
 using System;
 using System.Collections.Generic;
 using System.Threading;

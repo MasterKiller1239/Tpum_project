@@ -1,4 +1,4 @@
-﻿using ConnectionDependencies.DTO;
+﻿using DataClient.DTO;
 using LogicClient.OTD;
 using System.Collections.Generic;
 

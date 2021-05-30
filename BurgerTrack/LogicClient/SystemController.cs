@@ -1,4 +1,4 @@
-﻿using ConnectionDependencies.DTO;
+﻿using DataClient.DTO;
 using DataClient;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace LogicClient
         public Repository repository { get; set; }
         public WebSocketController webSocketController { get; set; }
         public Action<string> onProcess;
-
+       
         public SystemController(IDataFiller filler)
         {
             this.repository = new Repository(filler);
@@ -50,5 +50,21 @@ namespace LogicClient
         {
             return repository.GetListViewBurgers();
         }
+        //public ObservableCollection<BurgerDTO> ListViewBurgers { get; set; }
+        //public BurgerDTO selectedBurger { get; set; }
+        //public ObservableCollection<BurgerDTO> cart { get; set; } = new ObservableCollection<BurgerDTO>();
+        //public BurgerDTO selectedCart { get; set; }
+        //public void AddToCart()
+        //{
+        //    cart.Add(selectedBurger);
+        //}
+
+        //public void DeleteFromCart()
+        //{
+        //    if (cart.Contains(selectedCart))
+        //    {
+        //        cart.Remove(selectedCart);
+        //    }
+        //}
     }
 }

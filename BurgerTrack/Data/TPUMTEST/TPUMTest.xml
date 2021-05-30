@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="OPCUAModelDesign.xslt"?>
+<ModelDesign xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" TargetNamespace="http://example.com/UA/CommServer/" xmlns="http://opcfoundation.org/UA/ModelDesign.xsd">
+  <Namespaces>
+    <Namespace Name="TpumOPC" Prefix="TpumOPC" XmlPrefix="">http://example.com/UA/CommServer/</Namespace>
+    <Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</Namespace>
+  </Namespaces>
+  <ObjectType xmlns:q1="http://example.com/UA/CommServer/" SymbolicName="q1:Burger">
+    <Children>
+      <Variable SymbolicName="q1:name" xmlns:q2="http://opcfoundation.org/UA/" DataType="q2:String" />
+      <Variable SymbolicName="q1:price" xmlns:q3="http://opcfoundation.org/UA/" DataType="q3:Float" />
+      <Variable SymbolicName="q1:description" xmlns:q4="http://opcfoundation.org/UA/" DataType="q4:String" />
+      <Variable SymbolicName="q1:discount" xmlns:q5="http://opcfoundation.org/UA/" DataType="q5:Float" />
+      <Variable SymbolicName="q1:image" xmlns:q6="http://opcfoundation.org/UA/" DataType="q6:String" />
+    </Children>
+  </ObjectType>
+  <ObjectType xmlns:q7="http://example.com/UA/CommServer/" SymbolicName="q7:Customer">
+    <Children>
+      <Variable SymbolicName="q7:name" xmlns:q8="http://opcfoundation.org/UA/" DataType="q8:String" />
+      <Variable SymbolicName="q7:address" xmlns:q9="http://opcfoundation.org/UA/" DataType="q9:String" />
+      <Variable SymbolicName="q7:email" xmlns:q10="http://opcfoundation.org/UA/" DataType="q10:String" />
+      <Variable SymbolicName="q7:phone" xmlns:q11="http://opcfoundation.org/UA/" DataType="q11:String" />
+    </Children>
+  </ObjectType>
+  <ObjectType xmlns:q12="http://example.com/UA/CommServer/" SymbolicName="q12:Employee">
+    <Children>
+      <Variable SymbolicName="q12:name" xmlns:q13="http://opcfoundation.org/UA/" DataType="q13:String" />
+    </Children>
+  </ObjectType>
+  <ObjectType xmlns:q14="http://example.com/UA/CommServer/" SymbolicName="q14:Order">
+    <Children>
+      <Variable SymbolicName="q14:id" xmlns:q15="http://opcfoundation.org/UA/" DataType="q15:Guid" />
+      <Object SymbolicName="q14:Employee" />
+      <Object SymbolicName="q14:Customer" />
+      <Variable SymbolicName="q14:orderTime" xmlns:q16="http://opcfoundation.org/UA/" DataType="q16:DateTime" />
+      <Variable SymbolicName="q14:realizationTime" xmlns:q17="http://opcfoundation.org/UA/" DataType="q17:Integer" />
+      <Variable SymbolicName="q14:burgers" xmlns:q18="http://opcfoundation.org/UA/" DataType="q18:Double" />
+    </Children>
+  </ObjectType>
+</ModelDesign>

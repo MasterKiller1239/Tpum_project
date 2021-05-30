@@ -1,5 +1,5 @@
-﻿using ConnectionDependencies.DTO;
-using ConnectionDependencies.Requests;
+﻿using DataClient.DTO;
+using DataClient.Requests;
 using DataClient;
 
 using Newtonsoft.Json;

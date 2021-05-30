@@ -1,4 +1,4 @@
-﻿using ConnectionDependencies.DTO;
+﻿using DataClient.DTO;
 using System.Collections.ObjectModel;
 
 namespace DataClient
